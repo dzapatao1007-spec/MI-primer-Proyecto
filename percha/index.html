@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La Percha · Mi pedido</title>
+  <meta name="description" content="Propuesta para el reto ESIC: una app post-compra que avisa antes de que el cliente pregunte, pensada para el pico de fin de año de La Percha.">
+  <meta name="theme-color" content="#1c1917">
+  <link rel="icon" href="app/icon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --bg: #f6f2ea; --surface: #fffdf8; --ink: #1c1917; --muted: #6b635b; --line: #e6dfd3;
+      --accent: #b5552f; --accent-soft: #f6e4da; --ok: #2f6b4f;
+      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) { --bg: #151311; --surface: #1f1c19; --ink: #f3eee6; --muted: #a79e93; --line: #34302b; --accent: #e07a50; --accent-soft: #3a261d; --ok: #7cc6a0; color-scheme: dark; }
+    }
+    :root[data-theme="dark"] { --bg: #151311; --surface: #1f1c19; --ink: #f3eee6; --muted: #a79e93; --line: #34302b; --accent: #e07a50; --accent-soft: #3a261d; --ok: #7cc6a0; color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.55; font-size: 17px; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+    nav.top { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+    .logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 24px; text-decoration: none; }
+    .pill { font-size: 13px; border: 1px solid var(--line); border-radius: 99px; padding: 6px 12px; color: var(--muted); }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; margin: 0; }
+    h1 { font-size: clamp(40px, 6vw, 68px); }
+    h2 { font-size: clamp(30px, 4vw, 44px); }
+    h3 { font-size: 22px; }
+    .eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 0 0 14px; }
+    .lead { font-size: 20px; color: var(--muted); max-width: 34em; }
+    section { padding: 72px 0; border-top: 1px solid var(--line); }
+    .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; padding: 36px 0 72px; border: 0; }
+    .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .btn { display: inline-block; padding: 14px 20px; border-radius: 14px; font-weight: 600; text-decoration: none; }
+    .btn.primary { background: var(--accent); color: #fff; }
+    .btn.ghost { border: 1px solid var(--line); background: var(--surface); }
+    .phone { justify-self: center; width: 390px; max-width: 100%; height: 780px; border-radius: 48px; background: #0d0c0b; padding: 12px; box-shadow: 0 40px 80px -40px rgba(28,25,23,.55); }
+    .phone iframe { width: 100%; height: 100%; border: 0; border-radius: 38px; background: var(--bg); display: block; }
+    .phone-note { text-align: center; font-size: 14px; color: var(--muted); margin-top: 14px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 24px; }
+    .card p { color: var(--muted); margin: 10px 0 0; font-size: 16px; }
+    .num { font-family: var(--serif); font-size: 15px; color: var(--accent); font-weight: 600; }
+    .quote { font-family: var(--serif); font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0; }
+    .chain { list-style: none; padding: 0; margin: 28px 0 0; counter-reset: s; }
+    .chain li { counter-increment: s; display: grid; grid-template-columns: 44px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .chain li::before { content: counter(s); width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: var(--bg); font-weight: 700; font-size: 14px; }
+    .chain strong { display: block; }
+    .chain span { color: var(--muted); font-size: 16px; }
+    .arch { width: 100%; height: auto; margin-top: 28px; }
+    .arch text { font-family: var(--sans); fill: var(--ink); }
+    .arch .m { fill: var(--muted); font-size: 12px; }
+    .arch rect { fill: var(--surface); stroke: var(--line); }
+    .arch .hl { stroke: var(--accent); stroke-width: 1.5; }
+    .arch path { stroke: var(--muted); fill: none; stroke-width: 1.5; }
+    table { width: 100%; border-collapse: collapse; margin-top: 28px; font-size: 16px; }
+    th, td { text-align: left; padding: 14px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    td:last-child { font-family: var(--serif); font-size: 20px; white-space: nowrap; }
+    .tag { display: inline-block; font-size: 12px; border-radius: 99px; padding: 3px 10px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-bottom: 12px; }
+    .weeks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 28px; }
+    .weeks .card strong { font-family: var(--serif); font-size: 20px; }
+    footer { padding: 40px 0 60px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+    .small { font-size: 14px; color: var(--muted); }
+    @media (max-width: 900px) {
+      .hero, .grid2 { grid-template-columns: 1fr; }
+      .grid3, .weeks { grid-template-columns: 1fr; }
+      .phone { height: 680px; width: 340px; }
+      section { padding: 52px 0; }
+      table { font-size: 14px; }
+      td:last-child { font-size: 16px; white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="top">
+      <a class="logo" href="./"><svg viewBox="0 0 48 32" width="34" height="22" aria-hidden="true"><path d="M24 4a4 4 0 1 1 4 4c-2 0-4 1.6-4 4v1L4 26h40L24 13" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>la percha</a>
+      <span class="pill">Reto ESIC · Operaciones</span>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Una sola solución: Mi pedido</p>
+        <h1>Tu pedido te avisa antes de que preguntes.</h1>
+        <p class="lead">En diciembre La Percha multiplica sus pedidos y los clientes se quedan escribiendo “¿dónde está mi pedido?” sin respuesta. Mi pedido es la app post-compra que responde sola, con datos reales, para que el equipo atienda solo lo que de verdad necesita a una persona.</p>
+        <div class="cta">
+          <a class="btn primary" href="app/">Abrir la app en mi celular</a>
+          <a class="btn ghost" href="#solucion">Ver la propuesta</a>
+        </div>
+      </div>
+      <div>
+        <div class="phone"><iframe src="app/" title="Prototipo de la app La Percha · Mi pedido" loading="eager"></iframe></div>
+        <p class="phone-note">Prototipo funcional. Usa el botón “Demo” para avanzar el pedido o simular un retraso.</p>
+      </div>
+    </header>
+
+    <section id="problema">
+      <div class="grid2">
+        <div>
+          <p class="eyebrow">El problema</p>
+          <h2>Cada pedido sin noticias se convierte en un mensaje.</h2>
+        </div>
+        <div>
+          <p class="quote">“Pagué hace cinco días, escribí por WhatsApp y nadie me responde.”</p>
+          <p class="small">El cliente no se queja de la espera. Se queja de no saber.</p>
+        </div>
+      </div>
+      <div class="grid3">
+        <div class="card"><span class="num">01</span><h3>Silencio después de pagar</h3><p>La compra termina en el pago, pero la experiencia apenas empieza. Si el cliente no recibe información, pregunta.</p></div>
+        <div class="card"><span class="num">02</span><h3>El equipo se ahoga en la misma pregunta</h3><p>En el pico, el equipo pasa el día respondiendo “¿dónde está?” y deja sin atender los casos que sí necesitan a una persona.</p></div>
+        <div class="card"><span class="num">03</span><h3>Cambios caros y tardíos</h3><p>Una talla equivocada se descubre al recibir. Termina en un cambio con dos envíos, más costo y un cliente molesto.</p></div>
+      </div>
+    </section>
+
+    <section id="solucion">
+      <div class="grid2">
+        <div>
+          <p class="eyebrow">La solución</p>
+          <h2>Una app con un solo trabajo: que nadie tenga que preguntar.</h2>
+          <p class="lead" style="margin-top:18px">No es una tienda, un chatbot ni un programa de puntos. Es la línea de vida de cada pedido, conectada al sistema de operaciones y siempre un paso adelante del cliente.</p>
+        </div>
+        <ol class="chain">
+          <li><div><strong>Confirmado, con fecha honesta</strong><span>La fecha ya incluye la carga real de la bodega en temporada alta.</span></div></li>
+          <li><div><strong>Preparando: todavía puedes corregir</strong><span>Talla o dirección se cambian con un toque antes de empacar.</span></div></li>
+          <li><div><strong>Empacado, con foto real</strong><span>El cliente ve su paquete y quién lo revisó. Confianza antes de que salga.</span></div></li>
+          <li><div><strong>En camino y “llega hoy”</strong><span>Franja horaria y reprogramación en un toque si no va a estar.</span></div></li>
+          <li><div><strong>Entregado: ¿cómo te quedó?</strong><span>Opinión de talla en un toque y cambios con código QR y recogida en casa.</span></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="innovacion">
+      <p class="eyebrow">Lo que la hace distinta</p>
+      <h2>Seis ideas, una misma promesa.</h2>
+      <div class="grid3">
+        <div class="card"><span class="tag">Proactiva</span><h3>Avisos antes de la duda</h3><p>Cada cambio de estado en el ERP dispara un aviso por push o WhatsApp. El cliente se entera antes de preguntar.</p></div>
+        <div class="card"><span class="tag">Confianza</span><h3>Promesa Percha</h3><p>Si llegamos tarde, el cupón del 15% se activa solo. Sin reclamo, sin formulario. Convierte un fallo en lealtad.</p></div>
+        <div class="card"><span class="tag">Prevención</span><h3>Ventana de edición</h3><p>Cambiar la talla antes de empacar cuesta cero. Después cuesta dos envíos. La app abre esa ventana.</p></div>
+        <div class="card"><span class="tag">Humana</span><h3>Fila virtual, no chat eterno</h3><p>El cliente reserva un turno y le escriben a una hora exacta, con su pedido ya abierto. No tiene que repetir nada.</p></div>
+        <div class="card"><span class="tag">Transparencia</span><h3>Modo temporada alta</h3><p>Un aviso honesto: “hoy preparamos 1.240 pedidos”. Las fechas se ajustan solas a la carga real.</p></div>
+        <div class="card"><span class="tag">Comunidad</span><h3>#MiPercha</h3><p>Al recibir, el cliente califica la talla y comparte su look a cambio de un 10%. Así la entrega también genera contenido para redes.</p></div>
+      </div>
+    </section>
+
+    <section id="escala">
+      <div class="grid2">
+        <div>
+          <p class="eyebrow">Hecha para el pico</p>
+          <h2>Diseñada para aguantar diciembre.</h2>
+          <p class="lead" style="margin-top:18px">Cuando todos abren la app a la vez, ningún servidor de La Percha trabaja más. La app y el estado de cada pedido se sirven desde una CDN global, como una página estática.</p>
+        </div>
+        <div class="card">
+          <ul style="margin:0;padding-left:18px;color:var(--muted)">
+            <li><strong style="color:var(--ink)">App instalable (PWA):</strong> funciona en Android e iPhone sin pasar por las tiendas de apps. Lista en semanas.</li>
+            <li style="margin-top:10px"><strong style="color:var(--ink)">Abre al instante y sin conexión:</strong> el service worker guarda la app en el celular.</li>
+            <li style="margin-top:10px"><strong style="color:var(--ink)">Estado del pedido en caché de borde:</strong> el ERP publica un evento y la CDN entrega el estado. Las consultas no tocan la base de datos.</li>
+            <li style="margin-top:10px"><strong style="color:var(--ink)">Avisos en cola:</strong> los envíos por WhatsApp y push salen de una cola. Un pico de 10× se procesa en minutos, sin caídas.</li>
+          </ul>
+        </div>
+      </div>
+      <svg class="arch" viewBox="0 0 1000 170" role="img" aria-label="Flujo: el ERP publica eventos a una cola, que actualiza la CDN y envía avisos; la app lee de la CDN.">
+        <rect x="10" y="50" width="180" height="70" rx="14"/><text x="100" y="82" text-anchor="middle" font-weight="600">ERP de operaciones</text><text x="100" y="102" text-anchor="middle" class="m">cambia el estado</text>
+        <rect x="270" y="50" width="180" height="70" rx="14"/><text x="360" y="82" text-anchor="middle" font-weight="600">Cola de eventos</text><text x="360" y="102" text-anchor="middle" class="m">absorbe los picos</text>
+        <rect x="530" y="10" width="200" height="64" rx="14" class="hl"/><text x="630" y="40" text-anchor="middle" font-weight="600">CDN / caché de borde</text><text x="630" y="58" text-anchor="middle" class="m">estado del pedido</text>
+        <rect x="530" y="96" width="200" height="64" rx="14"/><text x="630" y="126" text-anchor="middle" font-weight="600">WhatsApp · Push</text><text x="630" y="144" text-anchor="middle" class="m">aviso proactivo</text>
+        <rect x="810" y="50" width="180" height="70" rx="14" class="hl"/><text x="900" y="82" text-anchor="middle" font-weight="600">App Mi pedido</text><text x="900" y="102" text-anchor="middle" class="m">miles a la vez</text>
+        <path d="M190 85h80M450 78l80-36M450 92l80 36M730 42l80 36M730 128l80-36"/>
+      </svg>
+    </section>
+
+    <section id="impacto">
+      <p class="eyebrow">Cómo sabremos que funciona</p>
+      <h2>Metas del piloto de diciembre</h2>
+      <p class="small" style="margin-top:12px">Son objetivos a validar con un piloto, no resultados medidos.</p>
+      <table>
+        <thead><tr><th>Indicador</th><th>Por qué importa</th><th>Meta</th></tr></thead>
+        <tbody>
+          <tr><td>Mensajes “¿dónde está mi pedido?”</td><td>Libera al equipo para los casos difíciles</td><td>−50%</td></tr>
+          <tr><td>Tiempo hasta la primera respuesta</td><td>El cliente nunca se siente ignorado</td><td>&lt; 30 min</td></tr>
+          <tr><td>Cambios por talla</td><td>La ventana de edición evita envíos dobles</td><td>−20%</td></tr>
+          <tr><td>Satisfacción post-entrega (CSAT)</td><td>Mide la experiencia, no solo la venta</td><td>≥ 4,5 / 5</td></tr>
+          <tr><td>Recompra a 60 días</td><td>Clientes bien atendidos vuelven</td><td>+15%</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="plan">
+      <p class="eyebrow">Plan de implementación</p>
+      <h2>Lista antes del pico, en cuatro semanas.</h2>
+      <div class="weeks">
+        <div class="card"><span class="num">Semana 1</span><p><strong>Conectar</strong><br>Estados del ERP a eventos. Plantillas de WhatsApp aprobadas.</p></div>
+        <div class="card"><span class="num">Semana 2</span><p><strong>Construir</strong><br>PWA con línea de vida, avisos y ventana de edición.</p></div>
+        <div class="card"><span class="num">Semana 3</span><p><strong>Piloto</strong><br>10% de los pedidos. Medimos mensajes entrantes y CSAT.</p></div>
+        <div class="card"><span class="num">Semana 4</span><p><strong>Escalar</strong><br>Todos los pedidos, con Promesa Percha y fila virtual activas.</p></div>
+      </div>
+    </section>
+
+    <footer>
+      La Percha · Mi pedido. Propuesta del equipo de operaciones para el reto ESIC. Prototipo con datos de ejemplo.
+    </footer>
+  </div>
+</body>
+</html>

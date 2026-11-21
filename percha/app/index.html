@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>La Percha · Mi pedido</title>
+  <meta name="description" content="Sigue tu pedido de La Percha en tiempo real, cámbialo y resuelve cualquier duda sin esperar.">
+  <meta name="theme-color" content="#1c1917">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="top">
+      <button class="brand" data-go="/" aria-label="Inicio">
+        <svg viewBox="0 0 48 32" width="30" height="20" aria-hidden="true"><path d="M24 4a4 4 0 1 1 4 4c-2 0-4 1.6-4 4v1L4 26h40L24 13" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>la percha</span>
+      </button>
+      <button class="bell" data-go="/avisos" aria-label="Avisos">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15L6 16Zm4 4h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="dot" id="unread" hidden></span>
+      </button>
+    </header>
+
+    <main id="view" tabindex="-1"></main>
+
+    <nav class="tabs" aria-label="Secciones">
+      <button data-go="/" data-tab="/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v12H4zM8 7a4 4 0 0 1 8 0" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Pedidos</button>
+      <button data-go="/cambios" data-tab="/cambios"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h13l-3-3M20 15H7l3 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Cambios</button>
+      <button data-go="/ayuda" data-tab="/ayuda"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Ayuda</button>
+      <button data-go="/avisos" data-tab="/avisos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15L6 16Zm4 4h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Avisos</button>
+    </nav>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <details class="demo" id="demo">
+      <summary>Demo ▾</summary>
+      <p>Controles para el jurado: simulan lo que el ERP envía a la app.</p>
+      <div class="demo-row">
+        <button data-demo="next">Avanzar pedido</button>
+        <button data-demo="late">Simular retraso</button>
+        <button data-demo="reset">Reiniciar</button>
+      </div>
+    </details>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
