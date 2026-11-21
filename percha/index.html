@@ -115,6 +115,10 @@
     .score div { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px; font-size: 14px; color: var(--muted); }
     .score strong { display: block; color: var(--ink); font-size: 15px; margin-bottom: 4px; }
     @media (max-width: 900px) { .journey { grid-template-columns: 1fr 1fr; } .mail .mp { grid-template-columns: 1fr 1fr 1fr; } }
+    .look { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 36px; }
+    .look img { width: 100%; height: auto; display: block; border-radius: 18px; border: 1px solid var(--line); aspect-ratio: 4/5; object-fit: cover; background: var(--surface); }
+    .look .big { grid-column: span 2; grid-row: span 2; }
+    @media (max-width: 900px) { .look { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 900px) {
       .hero, .grid2 { grid-template-columns: 1fr; }
       .grid3, .weeks { grid-template-columns: 1fr; }
@@ -265,6 +269,21 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <section id="lookbook">
+      <p class="eyebrow">Lookbook</p>
+      <h2>Así se ve La Percha Med en la calle.</h2>
+      <p class="lead" style="margin-top:18px">Cada pedido llega con la misma actitud de estas fotos. La experiencia después de comprar tiene que estar a la altura de la prenda.</p>
+      <div class="look">
+        <img src="app/img/look1.webp" alt="Conjunto gris, look urbano" width="640" height="800" loading="eager" decoding="async" class="big">
+        <img src="app/img/look2.webp" alt="Duo en conjuntos racing" width="640" height="800" loading="eager" decoding="async">
+        <img src="app/img/look3.webp" alt="Conjunto blanco y rojo" width="640" height="800" loading="lazy" decoding="async">
+        <img src="app/img/look4.webp" alt="Negro y gris en estudio" width="640" height="800" loading="lazy" decoding="async">
+        <img src="app/img/look5.webp" alt="Conjunto negro, look nocturno" width="640" height="800" loading="lazy" decoding="async">
+        <img src="app/img/look6.webp" alt="Chaqueta racing negra" width="640" height="800" loading="lazy" decoding="async">
+        <img src="app/img/look7.webp" alt="Conjunto negro, espalda" width="640" height="800" loading="lazy" decoding="async">
+        </div>
     </section>
 
     <section id="coleccion">
