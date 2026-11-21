@@ -1,8 +1,8 @@
 /* Service worker: la app abre al instante y funciona sin conexión.
    Estrategia stale-while-revalidate: cada visita sale de caché y se
    actualiza en segundo plano, así los picos no golpean al servidor. */
-var CACHE = "lapercha-v5";
-var ASSETS = ["./", "index.html", "app.css", "app.js", "logo.jpg", "manifest.webmanifest"];
+var CACHE = "lapercha-v6";
+var ASSETS = ["./", "index.html", "app.css", "app.js", "logo.jpg", "img/medallo-s.webp", "manifest.webmanifest"];
 
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(ASSETS); }).then(function () { return self.skipWaiting(); }));

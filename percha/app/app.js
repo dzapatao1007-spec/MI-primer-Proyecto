@@ -4,7 +4,7 @@
 (function () {
   "use strict";
 
-  var KEY = "lapercha.pedido.v5";
+  var KEY = "lapercha.pedido.v6";
 
   var STAGES = [
     { key: "confirmado", title: "Pedido confirmado", text: "Recibimos tu pago. Tu pedido entró a la fila de preparación." },
@@ -37,7 +37,7 @@
         courier: "Coordinadora · guía 7781 2290",
         address: "Cra. 43A #1-50, El Poblado, Medellín",
         items: [
-          { id: "a", name: "Conjunto Medallo (buzo + jogger)", size: "L", color: "Negro", price: 320000 },
+          { id: "a", name: "Conjunto Medallo (buzo + jogger)", size: "L", color: "Negro", price: 320000, img: "img/medallo-s.webp" },
           { id: "b", name: "Camiseta oversize Med", size: "M", color: "Hueso", price: 99000 }
         ]
       },
@@ -144,7 +144,7 @@
             return isNaN(it.size) === isNaN(z);
           }).map(function (z) { return "<option" + (z === it.size ? " selected" : "") + ">" + z + "</option>"; }).join("") + "</select></label>"
         : '<span class="meta">Talla ' + it.size + "</span>";
-      return '<li class="item"><span class="sw" style="background:' + (it.color === "Negro" ? "#0a0a0a" : "#ece7dc") + '"></span><div><p class="t">' + it.name + '</p><p class="meta">' + it.color + " · " + money(it.price) + "</p></div>" + sel + "</li>";
+      return '<li class="item"><span class="sw" style="background:' + (it.img ? "url(" + it.img + ") center/cover" : it.color === "Negro" ? "#0a0a0a" : "#ece7dc") + '"></span><div><p class="t">' + it.name + '</p><p class="meta">' + it.color + " · " + money(it.price) + "</p></div>" + sel + "</li>";
     }).join("");
     var total = o.items.reduce(function (a, b) { return a + b.price; }, 0);
     return '<button class="back" data-go="/">← Pedidos</button>' +
@@ -259,12 +259,14 @@
   /* ---------- Catálogo + motor de recomendaciones (IA simulada) ---------- */
 
   var CATALOG = [
-    { id: "c-medallo", name: "Conjunto Medallo", desc: "Buzo + jogger", color: "Negro", hex: "#0a0a0a", type: "conjunto", price: 320000, tags: ["neutro", "básico"], hot: 3 },
-    { id: "c-poblado", name: "Conjunto Poblado", desc: "Buzo + jogger", color: "Gris jaspe", hex: "#8a8a86", type: "conjunto", price: 320000, tags: ["neutro"], hot: 2 },
-    { id: "c-laureles", name: "Conjunto Laureles", desc: "Buzo + jogger", color: "Hueso", hex: "#ece7dc", type: "conjunto", price: 320000, tags: ["claro"], hot: 2 },
+    { id: "c-medallo", name: "Conjunto Medallo", desc: "Buzo + jogger", color: "Negro y gris", hex: "#0a0a0a", img: "img/medallo-s.webp", type: "conjunto", price: 320000, tags: ["neutro", "básico"], hot: 3 },
+    { id: "c-racer", name: "Conjunto Racer", desc: "Chaqueta + pantalón", color: "Azul", hex: "#3b8fe0", img: "img/racer-s.webp", type: "conjunto", price: 320000, tags: ["color", "nuevo"], hot: 4 },
+    { id: "c-inferno", name: "Conjunto Inferno", desc: "Buzo + jogger", color: "Negro y rojo", hex: "#b1121b", img: "img/inferno-s.webp", type: "conjunto", price: 320000, tags: ["color"], hot: 3 },
+    { id: "c-rose", name: "Conjunto Rosé", desc: "Buzo + jogger", color: "Rosa", hex: "#c9909c", img: "img/rose-s.webp", type: "conjunto", price: 320000, tags: ["claro"], hot: 2 },
+    { id: "c-cielo", name: "Conjunto Cielo", desc: "Buzo + jogger", color: "Azul claro", hex: "#aac4ee", img: "img/cielo-s.webp", type: "conjunto", price: 320000, tags: ["claro"], hot: 2 },
     { id: "t-oversize", name: "Camiseta Oversize Med", desc: "100% algodón", color: "Negra", hex: "#1d1d1b", type: "camiseta", price: 99000, tags: ["neutro", "básico"], hot: 3 },
     { id: "t-boxy", name: "Camiseta Boxy", desc: "100% algodón", color: "Blanca", hex: "#ffffff", type: "camiseta", price: 99000, tags: ["claro", "básico"], hot: 2 },
-    { id: "t-graphic", name: "Camiseta Graphic 0574", desc: "Estampado Medellín", color: "Naranja", hex: "#e2400a", type: "camiseta", price: 99000, tags: ["color", "nuevo"], hot: 4 }
+    { id: "t-graphic", name: "Camiseta Graphic 0574", desc: "Estampado Medellín", color: "Morada", hex: "#a64dff", type: "camiseta", price: 99000, tags: ["color", "nuevo"], hot: 4 }
   ];
 
   /* Puntúa cada prenda con señales del cliente: lo que ya compró, su talla
@@ -312,7 +314,7 @@
 
   function productCards(list) {
     return '<div class="wa-cards">' + list.map(function (r) {
-      return '<div class="wa-card"><span class="wa-sw" style="background:' + r.p.hex + '"></span><div><strong>' + r.p.name + '</strong><span>' + r.p.color + " · " + money(r.p.price) + "</span>" + (r.why ? '<em>' + r.why + "</em>" : "") + '</div><button class="wa-buy" data-buy="' + r.p.id + '">Lo quiero</button></div>';
+      return '<div class="wa-card"><span class="wa-sw" style="background:' + r.p.hex + (r.p.img ? " url(" + r.p.img + ") center/cover" : "") + '"></span><div><strong>' + r.p.name + '</strong><span>' + r.p.color + " · " + money(r.p.price) + "</span>" + (r.why ? '<em>' + r.why + "</em>" : "") + '</div><button class="wa-buy" data-buy="' + r.p.id + '">Lo quiero</button></div>';
     }).join("") + "</div>";
   }
 

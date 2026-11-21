@@ -71,6 +71,7 @@
     .small { font-size: 14px; color: var(--muted); }
     .shop { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
     .prod { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+    .prod img.img { width: 100%; height: auto; display: block; object-fit: cover; }
     .prod .img { aspect-ratio: 4/5; display: grid; place-items: center; font-family: var(--serif); font-weight: 800; letter-spacing: .08em; font-size: 13px; }
     .prod .info { padding: 16px 18px 20px; }
     .prod .info h3 { font-size: 18px; }
@@ -271,13 +272,15 @@
       <h2>Lo que el cliente está esperando.</h2>
       <p class="lead" style="margin-top:18px">Conjuntos a $320.000 y camisetas a $99.000. Cada compra entra a la app Mi pedido desde el primer minuto.</p>
       <div class="shop">
-        <article class="prod"><div class="img" style="background:#0a0a0a;color:#f2f2f0">LA PERCHA MED</div><div class="info"><h3>Conjunto Medallo</h3><p class="small" style="margin:6px 0 0">Buzo + jogger · Negro</p><div class="row"><span class="price">$320.000</span><span class="small">S · M · L · XL</span></div></div></article>
-        <article class="prod"><div class="img" style="background:#8a8a86;color:#0a0a0a">LA PERCHA MED</div><div class="info"><h3>Conjunto Poblado</h3><p class="small" style="margin:6px 0 0">Buzo + jogger · Gris jaspe</p><div class="row"><span class="price">$320.000</span><span class="small">S · M · L · XL</span></div></div></article>
-        <article class="prod"><div class="img" style="background:#ece7dc;color:#0a0a0a">LA PERCHA MED</div><div class="info"><h3>Conjunto Laureles</h3><p class="small" style="margin:6px 0 0">Buzo + jogger · Hueso</p><div class="row"><span class="price">$320.000</span><span class="small">S · M · L · XL</span></div></div></article>
+        <article class="prod"><img class="img" src="app/img/medallo.webp" alt="Conjunto Medallo" width="720" height="900" loading="eager" decoding="async"><div class="info"><h3>Conjunto Medallo</h3><p class="small" style="margin:6px 0 0">Buzo + jogger · Negro y gris</p><div class="row"><span class="price">$320.000</span><span class="small">S · M · L · XL</span></div></div></article>
+        <article class="prod"><img class="img" src="app/img/racer.webp" alt="Conjunto Racer" width="720" height="900" loading="eager" decoding="async"><div class="info"><h3>Conjunto Racer</h3><p class="small" style="margin:6px 0 0">Chaqueta + pantalón · Azul</p><div class="row"><span class="price">$320.000</span><span class="small">S · M · L · XL</span></div></div></article>
+        <article class="prod"><img class="img" src="app/img/inferno.webp" alt="Conjunto Inferno" width="720" height="900" loading="eager" decoding="async"><div class="info"><h3>Conjunto Inferno</h3><p class="small" style="margin:6px 0 0">Buzo + jogger · Negro y rojo</p><div class="row"><span class="price">$320.000</span><span class="small">S · M · L · XL</span></div></div></article>
+        <article class="prod"><img class="img" src="app/img/rose.webp" alt="Conjunto Rosé" width="720" height="900" loading="lazy" decoding="async"><div class="info"><h3>Conjunto Rosé</h3><p class="small" style="margin:6px 0 0">Buzo + jogger · Rosa</p><div class="row"><span class="price">$320.000</span><span class="small">S · M · L · XL</span></div></div></article>
+        <article class="prod"><img class="img" src="app/img/cielo.webp" alt="Conjunto Cielo" width="720" height="900" loading="lazy" decoding="async"><div class="info"><h3>Conjunto Cielo</h3><p class="small" style="margin:6px 0 0">Buzo + jogger · Azul claro</p><div class="row"><span class="price">$320.000</span><span class="small">S · M · L · XL</span></div></div></article>
         <article class="prod"><div class="img" style="background:#1d1d1b;color:#a64dff">LA PERCHA MED</div><div class="info"><h3>Camiseta Oversize Med</h3><p class="small" style="margin:6px 0 0">100% algodón · Negra</p><div class="row"><span class="price">$99.000</span><span class="small">S · M · L · XL</span></div></div></article>
-        <article class="prod"><div class="img" style="background:#ffffff;color:#0a0a0a">LA PERCHA MED</div><div class="info"><h3>Camiseta Boxy</h3><p class="small" style="margin:6px 0 0">100% algodón · Blanca</p><div class="row"><span class="price">$99.000</span><span class="small">S · M · L · XL</span></div></div></article>
-        <article class="prod"><div class="img" style="background:#a64dff;color:#ffffff">LA PERCHA MED</div><div class="info"><h3>Camiseta Graphic 0574</h3><p class="small" style="margin:6px 0 0">Estampado Medellín · Naranja</p><div class="row"><span class="price">$99.000</span><span class="small">S · M · L · XL</span></div></div></article>
-      </div>
+        <article class="prod"><div class="img" style="background:#ffffff;color:#060509">LA PERCHA MED</div><div class="info"><h3>Camiseta Boxy</h3><p class="small" style="margin:6px 0 0">100% algodón · Blanca</p><div class="row"><span class="price">$99.000</span><span class="small">S · M · L · XL</span></div></div></article>
+        <article class="prod"><div class="img" style="background:#7a22d6;color:#ffffff">LA PERCHA MED</div><div class="info"><h3>Camiseta Graphic 0574</h3><p class="small" style="margin:6px 0 0">Estampado Medellín · Morada</p><div class="row"><span class="price">$99.000</span><span class="small">S · M · L · XL</span></div></div></article>
+        </div>
     </section>
 
     <section id="automatizaciones">

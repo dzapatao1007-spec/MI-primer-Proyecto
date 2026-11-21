@@ -182,3 +182,6 @@ select { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; 
 .card { box-shadow: 0 0 0 1px #00000020; }
 .demo { background: var(--surface); }
 select { color: var(--ink); }
+
+.wa-sw, .sw { background-size: cover !important; }
+.wa-card, .item { content-visibility: auto; }
