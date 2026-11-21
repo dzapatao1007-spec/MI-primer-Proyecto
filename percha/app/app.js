@@ -4,7 +4,7 @@
 (function () {
   "use strict";
 
-  var KEY = "lapercha.pedido.v1";
+  var KEY = "lapercha.pedido.v2";
 
   var STAGES = [
     { key: "confirmado", title: "Pedido confirmado", text: "Recibimos tu pago. Tu pedido entró a la fila de preparación." },
@@ -37,8 +37,8 @@
         courier: "Coordinadora · guía 7781 2290",
         address: "Cra. 43A #1-50, El Poblado, Medellín",
         items: [
-          { id: "a", name: "Jean negro tiro alto", size: "28", color: "Negro", price: 189900 },
-          { id: "b", name: "Camisa de lino", size: "M", color: "Arena", price: 139900 }
+          { id: "a", name: "Hoodie oversize", size: "L", color: "Negro", price: 249900 },
+          { id: "b", name: "Camiseta boxy fit", size: "M", color: "Hueso", price: 129900 }
         ]
       },
       notes: [
@@ -109,7 +109,7 @@
   }
 
   function packagePhoto() {
-    return '<figure class="photo"><svg viewBox="0 0 280 150" role="img" aria-label="Foto de tu paquete empacado"><rect width="280" height="150" fill="#e7e1d6"/><rect x="70" y="40" width="140" height="86" rx="6" fill="#c8a27a"/><rect x="70" y="40" width="140" height="22" fill="#b88f66"/><rect x="132" y="40" width="16" height="86" fill="#e9dcc7"/><rect x="152" y="82" width="46" height="30" rx="3" fill="#fbf8f2"/><path d="M160 92h30M160 100h22" stroke="#57534e" stroke-width="3"/><text x="88" y="106" font-family="Georgia,serif" font-size="13" fill="#3b2f25">la percha</text></svg><figcaption>Empacado por Valentina · revisado 2 veces</figcaption></figure>';
+    return '<figure class="photo"><svg viewBox="0 0 280 150" role="img" aria-label="Foto de tu paquete empacado"><rect width="280" height="150" fill="#e7e1d6"/><rect x="70" y="40" width="140" height="86" rx="6" fill="#c8a27a"/><rect x="70" y="40" width="140" height="22" fill="#b88f66"/><rect x="132" y="40" width="16" height="86" fill="#e9dcc7"/><rect x="152" y="82" width="46" height="30" rx="3" fill="#fbf8f2"/><path d="M160 92h30M160 100h22" stroke="#57534e" stroke-width="3"/><text x="140" y="142" text-anchor="middle" font-family="Syne,sans-serif" font-weight="800" font-size="10" letter-spacing="2" fill="#0a0a0a">LA PERCHA MED</text></svg><figcaption>Empacado por Valentina · revisado 2 veces</figcaption></figure>';
   }
 
   function viewHome() {
@@ -142,7 +142,7 @@
             return isNaN(it.size) === isNaN(z);
           }).map(function (z) { return "<option" + (z === it.size ? " selected" : "") + ">" + z + "</option>"; }).join("") + "</select></label>"
         : '<span class="meta">Talla ' + it.size + "</span>";
-      return '<li class="item"><span class="sw" style="background:' + (it.color === "Negro" ? "#1c1917" : "#d6c6a8") + '"></span><div><p class="t">' + it.name + '</p><p class="meta">' + it.color + " · " + money(it.price) + "</p></div>" + sel + "</li>";
+      return '<li class="item"><span class="sw" style="background:' + (it.color === "Negro" ? "#0a0a0a" : "#ece7dc") + '"></span><div><p class="t">' + it.name + '</p><p class="meta">' + it.color + " · " + money(it.price) + "</p></div>" + sel + "</li>";
     }).join("");
     var total = o.items.reduce(function (a, b) { return a + b.price; }, 0);
     return '<button class="back" data-go="/">← Pedidos</button>' +
@@ -163,7 +163,7 @@
 
   function rateCard() {
     if (state.rating) {
-      return '<section class="card thanks"><h2 class="h2">¡Gracias, Daniela!</h2><p>Tu opinión de talla ayuda a la próxima persona que compre este jean.</p><button class="primary" data-act="share">Compartir mi look · gana 10%</button></section>';
+      return '<section class="card thanks"><h2 class="h2">¡Gracias, Daniela!</h2><p>Tu opinión de talla ayuda a la próxima persona que compre esta prenda.</p><button class="primary" data-act="share">Compartir mi look · gana 10%</button></section>';
     }
     return '<section class="card"><h2 class="h2">¿Cómo te quedó?</h2>' +
       '<div class="fit">' + ["Pequeño", "Perfecto", "Grande"].map(function (f) {
@@ -360,7 +360,7 @@
         }
         break;
       case "share":
-        var text = "Mi look de La Percha llegó justo a tiempo 🖤";
+        var text = "Mi look de La Percha Med llegó justo a tiempo 🖤";
         if (navigator.share) { navigator.share({ title: "La Percha", text: text }).catch(function () {}); }
         else toast("Comparte tu foto con #MiPercha y recibe 10% en tu próxima compra.");
         break;

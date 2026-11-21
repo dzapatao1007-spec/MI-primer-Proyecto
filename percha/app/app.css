@@ -1,16 +1,16 @@
 :root {
-  --bg: #f6f2ea;
-  --surface: #fffdf8;
-  --ink: #1c1917;
-  --muted: #6b635b;
-  --line: #e6dfd3;
-  --accent: #b5552f;
-  --accent-soft: #f6e4da;
+  --bg: #f2f2f0;
+  --surface: #ffffff;
+  --ink: #0a0a0a;
+  --muted: #5f5f5b;
+  --line: #e0e0dc;
+  --accent: #e2400a;
+  --accent-soft: #fde6dc;
   --ok: #2f6b4f;
   --ok-soft: #e1efe7;
   --wa: #1f7a4d;
-  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif: "Syne", "Space Grotesk", system-ui, sans-serif;
+  --sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -39,11 +39,11 @@ button { cursor: pointer; background: none; border: 0; padding: 0; text-align: l
 .shell { max-width: 460px; margin: 0 auto; min-height: 100vh; padding: 0 16px 150px; position: relative; }
 
 .top { display: flex; justify-content: space-between; align-items: center; padding: 16px 0 10px; position: sticky; top: 0; background: var(--bg); z-index: 5; }
-.brand { display: flex; align-items: center; gap: 8px; font-family: var(--serif); font-size: 22px; letter-spacing: -0.01em; }
+.brand { display: flex; align-items: center; gap: 8px; font-family: var(--serif); font-size: 18px; font-weight: 800; letter-spacing: 0.02em; }
 .bell { position: relative; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); }
 .dot { position: absolute; top: 8px; right: 9px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); }
 
-.h { font-family: var(--serif); font-weight: 600; font-size: 28px; letter-spacing: -0.02em; margin: 14px 0 4px; }
+.h { font-family: var(--serif); font-weight: 700; font-size: 28px; letter-spacing: -0.02em; margin: 14px 0 4px; }
 .h2 { font-size: 16px; margin: 0; }
 .sub { color: var(--muted); margin: 0 0 14px; }
 .eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin: 0; }

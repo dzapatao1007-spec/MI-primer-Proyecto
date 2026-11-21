@@ -3,16 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>La Percha · Mi pedido</title>
+  <title>La Percha Med · Mi pedido</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
   <meta name="description" content="Propuesta para el reto ESIC: una app post-compra que avisa antes de que el cliente pregunte, pensada para el pico de fin de año de La Percha.">
   <meta name="theme-color" content="#1c1917">
   <link rel="icon" href="app/icon.svg" type="image/svg+xml">
   <style>
     :root {
-      --bg: #f6f2ea; --surface: #fffdf8; --ink: #1c1917; --muted: #6b635b; --line: #e6dfd3;
-      --accent: #b5552f; --accent-soft: #f6e4da; --ok: #2f6b4f;
-      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --bg: #f2f2f0; --surface: #ffffff; --ink: #0a0a0a; --muted: #5f5f5b; --line: #e0e0dc;
+      --accent: #e2400a; --accent-soft: #fde6dc; --ok: #2f6b4f;
+      --serif: "Syne", "Space Grotesk", system-ui, sans-serif;
+      --sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       color-scheme: light;
     }
     @media (prefers-color-scheme: dark) {
@@ -24,9 +25,9 @@
     a { color: inherit; }
     .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
     nav.top { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
-    .logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 24px; text-decoration: none; }
+    .logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 20px; font-weight: 800; letter-spacing: .02em; text-decoration: none; }
     .pill { font-size: 13px; border: 1px solid var(--line); border-radius: 99px; padding: 6px 12px; color: var(--muted); }
-    h1, h2, h3 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; margin: 0; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: -0.02em; line-height: 1.08; margin: 0; }
     h1 { font-size: clamp(40px, 6vw, 68px); }
     h2 { font-size: clamp(30px, 4vw, 44px); }
     h3 { font-size: 22px; }
@@ -80,7 +81,7 @@
 <body>
   <div class="wrap">
     <nav class="top">
-      <a class="logo" href="./"><svg viewBox="0 0 48 32" width="34" height="22" aria-hidden="true"><path d="M24 4a4 4 0 1 1 4 4c-2 0-4 1.6-4 4v1L4 26h40L24 13" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>la percha</a>
+      <a class="logo" href="./"><svg viewBox="0 0 48 32" width="34" height="22" aria-hidden="true"><path d="M24 4a4 4 0 1 1 4 4c-2 0-4 1.6-4 4v1L4 26h40L24 13" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>LA PERCHA MED</a>
       <span class="pill">Reto ESIC · Operaciones</span>
     </nav>
 
