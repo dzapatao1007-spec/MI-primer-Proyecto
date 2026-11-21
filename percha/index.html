@@ -83,6 +83,36 @@
     .flow .then { margin: 10px 0 0; color: var(--muted); font-size: 15px; }
     .flow .tool { display: inline-block; margin-top: 12px; font-size: 12px; font-weight: 600; color: var(--accent); }
     @media (max-width: 900px) { .shop, .flow { grid-template-columns: 1fr; } }
+    .chatdemo { background: #efeae2; border-radius: 22px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 15px; color: #111b21; }
+    .chatdemo .b { max-width: 85%; background: #fff; padding: 9px 12px; border-radius: 12px; border-top-left-radius: 3px; box-shadow: 0 1px 1px rgba(0,0,0,.08); }
+    .chatdemo .u { align-self: flex-end; background: #d9fdd3; border-radius: 12px; border-top-right-radius: 3px; border-top-left-radius: 12px; }
+    .chatdemo .h { margin: -16px -16px 4px; padding: 12px 16px; background: #075e54; color: #fff; border-radius: 22px 22px 0 0; font-weight: 600; }
+    .chatdemo .h span { display: block; font-size: 12px; font-weight: 400; opacity: .85; }
+    .caps { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+    .caps li { display: grid; grid-template-columns: 36px 1fr; gap: 12px; align-items: start; }
+    .caps .ic { width: 36px; height: 36px; border-radius: 12px; background: var(--accent-soft); display: grid; place-items: center; font-size: 18px; }
+    .caps strong { display: block; }
+    .caps span { color: var(--muted); font-size: 15px; }
+    .journey { list-style: none; padding: 0; margin: 36px 0 0; position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .journey li { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 18px; }
+    .journey .day { font-family: var(--serif); font-weight: 800; font-size: 22px; }
+    .journey .ch { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 99px; margin: 8px 0 6px; }
+    .ch.wa { background: #d9fdd3; color: #0b6b4b; } .ch.em { background: #e4ecff; color: #2846a8; } .ch.ia { background: var(--accent-soft); color: var(--accent); }
+    .journey p { margin: 0; color: var(--muted); font-size: 15px; }
+    .mail { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+    .mail .mh { padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+    .mail .mh strong { color: var(--ink); }
+    .mail .mb { padding: 22px 18px; }
+    .mail .mb h3 { font-size: 24px; }
+    .mail .mp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0; }
+    .mail .mp div { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; font-size: 13px; }
+    .mail .mp i { display: block; aspect-ratio: 1; }
+    .mail .mp b, .mail .mp small { display: block; padding: 0 10px; }
+    .mail .mp b { padding-top: 8px; } .mail .mp small { padding-bottom: 10px; color: var(--muted); }
+    .score { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 28px; }
+    .score div { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px; font-size: 14px; color: var(--muted); }
+    .score strong { display: block; color: var(--ink); font-size: 15px; margin-bottom: 4px; }
+    @media (max-width: 900px) { .journey { grid-template-columns: 1fr 1fr; } .mail .mp { grid-template-columns: 1fr 1fr 1fr; } }
     @media (max-width: 900px) {
       .hero, .grid2 { grid-template-columns: 1fr; }
       .grid3, .weeks { grid-template-columns: 1fr; }
@@ -164,6 +194,77 @@
       </div>
     </section>
 
+    <section id="whatsapp">
+      <div class="grid2">
+        <div>
+          <p class="eyebrow">Asistente de WhatsApp con IA</p>
+          <h2>Percha: el asesor que atiende a todos tus clientes a la vez.</h2>
+          <p class="lead" style="margin-top:18px">En diciembre llegan miles de mensajes. Percha responde cada uno en segundos, en el mismo WhatsApp donde ya compran tus clientes, con los datos reales de su pedido.</p>
+          <ul class="caps" style="margin-top:26px">
+            <li><span class="ic">📦</span><div><strong>Estado del pedido al instante</strong><span>Lee el ERP: etapa, fecha, transportadora y guía. Avisa solo en cada cambio.</span></div></li>
+            <li><span class="ic">📏</span><div><strong>Asesor de talla</strong><span>Tres preguntas (estatura, peso y fit) y recomienda la talla. Si el pedido no coincide y aún no se empacó, la corrige.</span></div></li>
+            <li><span class="ic">✨</span><div><strong>Recomendaciones y venta en el chat</strong><span>La IA elige prendas que combinan con lo que compró, en su talla, y genera el link de pago ahí mismo.</span></div></li>
+            <li><span class="ic">🔄</span><div><strong>Cambios y reprogramaciones</strong><span>Gestiona cambios gratis con recogida en casa y mueve entregas sin llamar a nadie.</span></div></li>
+            <li><span class="ic">👤</span><div><strong>Paso a un asesor humano con contexto</strong><span>Si el caso lo necesita, asigna turno y el asesor recibe la conversación completa.</span></div></li>
+          </ul>
+          <div class="cta"><a class="btn primary" href="app/#/whatsapp">Probar el chat</a></div>
+        </div>
+        <div class="chatdemo" aria-label="Ejemplo de conversación">
+          <div class="h">La Percha Med<span>Asistente IA · responde al instante</span></div>
+          <div class="b u">Hola, ¿qué talla soy? Mido 175 y peso 80 kg, me gusta ancho</div>
+          <div class="b">📏 Tu talla en La Percha Med es <strong>XL</strong> para fit oversize. El 92% de clientes con medidas parecidas se quedó con esa talla. Tu Conjunto Medallo está en L y aún no lo empacamos, ¿lo cambio sin costo?</div>
+          <div class="b u">Sí, cámbialo</div>
+          <div class="b">Listo ✅ Ajustado a <strong>XL</strong> antes de empacar. Llega jue 27 – vie 28 nov. ¿Te muestro camisetas que combinan?</div>
+          <div class="b u">Dale</div>
+          <div class="b">✨ La <strong>Camiseta Oversize Med</strong> negra ($99.000) combina con tu conjunto y es lo más pedido en Medellín. ¿Te la separo?</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fidelizacion">
+      <p class="eyebrow">Fidelización automática</p>
+      <h2>Cada cliente, en contacto activo. Sin que nadie lo tenga que recordar.</h2>
+      <p class="lead" style="margin-top:18px">Después de la entrega, una secuencia automática mantiene la relación por WhatsApp y correo. La IA elige qué prendas mostrarle a cada persona.</p>
+      <ol class="journey">
+        <li><span class="day">Día 0</span><br><span class="ch wa">WhatsApp</span><p>Bienvenida, guía de cuidado de la prenda y cómo combinarla.</p></li>
+        <li><span class="day">Día 2</span><br><span class="ch wa">WhatsApp</span><p>“¿Cómo te quedó?” Calificación de talla en un toque. Si es ≤ 3, rescate inmediato por un asesor.</p></li>
+        <li><span class="day">Día 7</span><br><span class="ch em">Email</span><p>“Así lo usa la comunidad”: looks #MiPercha y 10% por compartir el suyo.</p></li>
+        <li><span class="day">Día 21</span><br><span class="ch ia">IA</span><p>Elige 3 prendas que complementan su compra, en su talla confirmada y sus colores.</p></li>
+        <li><span class="day">Día 30</span><br><span class="ch wa">WhatsApp</span> <span class="ch em">Email</span><p>Recompra: las 3 recomendaciones + VUELVE10 por 72 h. Compra desde el chat.</p></li>
+        <li><span class="day">Lanzamientos</span><br><span class="ch wa">WhatsApp</span><p>Acceso anticipado 24 h a drops nuevos para clientes recurrentes.</p></li>
+        <li><span class="day">Cumpleaños</span><br><span class="ch em">Email</span> <span class="ch wa">WhatsApp</span><p>Regalo de 15% y envío prioritario durante su semana.</p></li>
+        <li><span class="day">90 días sin comprar</span><br><span class="ch ia">IA</span><p>Detecta riesgo de abandono y envía una oferta personalizada para recuperarlo.</p></li>
+      </ol>
+
+      <div class="grid2" style="margin-top:40px">
+        <div>
+          <h3>Cómo elige la IA qué recomendar</h3>
+          <p class="small" style="margin-top:10px;font-size:16px">Cada prenda del catálogo recibe un puntaje por cliente. Se envían las tres con mayor puntaje y se excluye lo que ya compró.</p>
+          <div class="score">
+            <div><strong>Complemento</strong>Combina con lo que ya compró (conjunto → camiseta).</div>
+            <div><strong>Talla confirmada</strong>Solo muestra lo que hay en su talla.</div>
+            <div><strong>Estilo</strong>Sus colores y fit preferidos.</div>
+            <div><strong>Tendencia</strong>Lo más pedido en su ciudad.</div>
+            <div><strong>Momento</strong>Días desde la compra y temporada.</div>
+          </div>
+        </div>
+        <div class="mail" aria-label="Ejemplo de correo de recompra">
+          <div class="mh"><strong>De:</strong> La Percha Med &nbsp;·&nbsp; <strong>Asunto:</strong> Daniela, esto combina con tu Conjunto Medallo</div>
+          <div class="mb">
+            <h3>Elegido para ti, en talla XL.</h3>
+            <p class="small" style="font-size:15px;margin-top:8px">Hace un mes llegó tu Conjunto Medallo. Estas prendas lo completan:</p>
+            <div class="mp">
+              <div><i style="background:#1d1d1b"></i><b>Oversize Med</b><small>$99.000</small></div>
+              <div><i style="background:#e2400a"></i><b>Graphic 0574</b><small>$99.000</small></div>
+              <div><i style="background:#8a8a86"></i><b>Conj. Poblado</b><small>$320.000</small></div>
+            </div>
+            <a class="btn primary" href="app/#/whatsapp" style="display:block;text-align:center">Comprar con 10% · VUELVE10</a>
+            <p class="small" style="margin-top:10px">Válido 72 h. También puedes responder por WhatsApp y te lo separamos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="coleccion">
       <p class="eyebrow">La colección</p>
       <h2>Lo que el cliente está esperando.</h2>
@@ -181,7 +282,7 @@
     <section id="automatizaciones">
       <p class="eyebrow">Automatizaciones</p>
       <h2>El equipo no escala en diciembre. Las automatizaciones sí.</h2>
-      <p class="lead" style="margin-top:18px">Diez flujos que trabajan solos para que ningún cliente quede desatendido. En el prototipo, cada aviso muestra la automatización que lo disparó.</p>
+      <p class="lead" style="margin-top:18px">Flujos que trabajan solos para que ningún cliente quede desatendido. En el prototipo, cada aviso muestra la automatización que lo disparó.</p>
       <ol class="flow">
         <li><p class="trig">Cuando: Cambia el estado en el ERP</p><h3>Aviso proactivo</h3><p class="then">WhatsApp o push al cliente en cada paso, con la fecha actualizada.</p><span class="tool">⚡ ERP → cola → WhatsApp Business API</span></li>
         <li><p class="trig">Cuando: Llega un mensaje “¿dónde está mi pedido?”</p><h3>Respuesta automática con IA</h3><p class="then">Un clasificador detecta la intención y responde con los datos reales del pedido. Solo escala lo complejo.</p><span class="tool">⚡ IA + WhatsApp</span></li>

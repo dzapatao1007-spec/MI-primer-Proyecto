@@ -59,3 +59,18 @@ No encontré publicadas las bases exactas de este reto. Esto es lo que sí apare
 - Cambios: después de la entrega, se genera un código QR con recogida en casa.
 - Ayuda: respuestas con los datos del pedido y la fila virtual.
 - Avisos: historial de mensajes proactivos por WhatsApp y push.
+
+## 6. Enfoque en el cliente: asistente de WhatsApp + fidelización
+
+**Percha, asistente de WhatsApp con IA** (pestaña WhatsApp de la app):
+- Estado del pedido con datos reales: etapa, fecha, transportadora y cupón si hay retraso.
+- Asesor de talla: estatura, peso y fit. Recomienda la talla y, si el pedido no coincide y no se ha empacado, la corrige.
+- Recomendaciones elegidas por la IA, con botón "Lo quiero" que genera el link de pago (venta en el chat).
+- Cambios, precios, pagos y paso a un asesor humano con turno y contexto.
+- Los avisos proactivos del pedido llegan al mismo chat.
+
+**Fidelización automática:** día 0 bienvenida, día 2 calificación de talla (rescate si es ≤ 3), día 7 comunidad #MiPercha, día 21 la IA elige 3 prendas, día 30 recompra por WhatsApp y email con VUELVE10, lanzamientos anticipados, cumpleaños y recuperación tras 90 días sin comprar.
+
+**Demo:** "Demo → +30 días: recompra IA" envía el WhatsApp con 3 recomendaciones y registra el email en Avisos.
+
+**Motor de recomendación:** puntúa cada prenda por complemento con lo comprado, talla confirmada, colores y fit, tendencia y momento. Excluye lo que ya compró.
