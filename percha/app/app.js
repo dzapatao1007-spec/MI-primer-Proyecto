@@ -4,7 +4,7 @@
 (function () {
   "use strict";
 
-  var KEY = "lapercha.pedido.v6";
+  var KEY = "lapercha.pedido.v7";
 
   var STAGES = [
     { key: "confirmado", title: "Pedido confirmado", text: "Recibimos tu pago. Tu pedido entró a la fila de preparación." },
@@ -38,7 +38,7 @@
         address: "Cra. 43A #1-50, El Poblado, Medellín",
         items: [
           { id: "a", name: "Conjunto Medallo (buzo + jogger)", size: "L", color: "Negro", price: 320000, img: "img/medallo-s.webp" },
-          { id: "b", name: "Camiseta oversize Med", size: "M", color: "Hueso", price: 99000 }
+          { id: "b", name: "Camiseta oversize Med", size: "M", color: "Hueso", price: 99000, img: "logo.jpg" }
         ]
       },
       notes: [
@@ -87,6 +87,18 @@
 
   /* ---------- Vistas ---------- */
 
+  function banner(img, eyebrow, title) {
+    return '<header class="banner" style="background-image:linear-gradient(180deg,rgba(6,5,9,.15) 0%,rgba(6,5,9,.92) 100%),url(img/' + img + '.webp)"><img src="logo.jpg" alt="" class="banner-logo" width="44" height="44"><p class="eyebrow">' + eyebrow + '</p><h1 class="h">' + title + "</h1></header>";
+  }
+  function big(p) { return p.img && p.img.indexOf("-s.webp") > -1 ? p.img.replace("-s.webp", ".webp") : p.img; }
+  function carousel(list) {
+    return '<div class="carousel">' + list.map(function (r) {
+      var im = big(r.p);
+      return '<article class="pc"><div class="pc-img' + (im === "logo.jpg" ? " logo" : "") + '" style="background-image:url(' + im + ')"></div><div class="pc-i"><strong>' + r.p.name + "</strong><span>" + money(r.p.price) + "</span>" + (r.why ? "<em>" + r.why + "</em>" : "") + '<button class="wa-buy" data-buy="' + r.p.id + '">Lo quiero</button></div></article>';
+    }).join("") + "</div>";
+  }
+
+
   function peakBanner() {
     return '<div class="peak"><span class="pulse" aria-hidden="true"></span><div><strong>Temporada alta, sin sorpresas.</strong> Hoy preparamos 1.240 pedidos. Las fechas que ves ya incluyen ese volumen.</div></div>';
   }
@@ -118,9 +130,10 @@
     var pct = Math.round((state.stage / (STAGES.length - 1)) * 100);
     var eta = state.coupon ? o.etaLate : o.eta;
     return peakBanner() +
-      '<h1 class="h">Hola, Daniela</h1>' +
+      banner("look1", "Tu pedido, en vivo", "Hola, Daniela") +
       '<button class="card order" data-go="/pedido">' +
         '<div class="row"><span class="eyebrow">Pedido ' + o.id + '</span><span class="chip">' + s.title + '</span></div>' +
+        '<div class="thumbs">' + o.items.map(function (it) { return '<span style="background-image:url(' + it.img + ')"></span>'; }).join("") + "</div>" +
         '<p class="eta-label">' + (state.stage === 5 ? "Entregado" : "Llega") + '</p>' +
         '<p class="eta">' + (state.stage === 5 ? "Ya está contigo" : state.stage === 4 ? "Hoy, " + o.slot : eta) + '</p>' +
         '<div class="bar" role="progressbar" aria-valuenow="' + pct + '" aria-valuemin="0" aria-valuemax="100"><span style="width:' + pct + '%"></span></div>' +
@@ -128,7 +141,7 @@
         '<span class="link">Ver línea de vida →</span>' +
       "</button>" +
       promiseCard() +
-      '<section class="card foryou"><div class="row"><h2 class="h2">Elegido para ti por IA</h2><button class="ghost sm" data-go="/whatsapp" style="margin:0">Ver en chat</button></div>' + productCards(recommend(3)) + "</section>" +
+      '<section class="foryou"><div class="row"><h2 class="h2">Elegido para ti por IA</h2><button class="ghost sm" data-go="/whatsapp" style="margin:0">Ver en chat</button></div>' + carousel(recommend(8).filter(function (r) { return r.p.img && r.p.img !== "logo.jpg"; }).slice(0, 4)) + "</section>" +
       '<div class="grid2">' +
         '<button class="tile" data-go="/pedido"><strong>' + (state.stage < 2 ? "Cambiar talla o dirección" : "Seguir mi pedido") + '</strong><span>' + (state.stage < 2 ? "Abierto hasta que lo empaquemos" : "Cada paso, en vivo") + "</span></button>" +
         '<button class="tile" data-go="/whatsapp"><strong>Escríbele a Percha</strong><span>Asistente de WhatsApp 24/7</span></button>' +
@@ -223,7 +236,7 @@
 
   function viewExchange() {
     if (state.stage < 5) {
-      return '<h1 class="h">Cambios</h1><p class="sub">Cambia talla o color en 2 toques, sin llamadas.</p>' +
+      return banner("look3", "Cambios fáciles", "Cambios") + '<p class="sub">Cambia talla o color en 2 toques, sin llamadas.</p>' +
         '<div class="card"><p>Tu pedido aún no llega. ' + (state.stage < 2
           ? 'Todavía puedes <strong>cambiar la talla antes de que lo empaquemos</strong>: es más rápido que un cambio.</p><button class="primary" data-go="/pedido">Ajustar talla ahora</button>'
           : "Cuando lo recibas, aquí podrás pedir el cambio y lo recogemos en tu casa.</p>") + "</div>";
@@ -235,7 +248,7 @@
         '<div class="card"><p>Te enviamos la talla nueva el mismo día que recogemos. Si no hay stock, te devolvemos el dinero en 48 h.</p></div>';
     }
     var o = state.order;
-    return '<h1 class="h">Cambios</h1><p class="sub">Tienes 30 días. Elige la prenda y la talla nueva.</p>' +
+    return banner("look3", "Cambios fáciles", "Cambios") + '<p class="sub">Tienes 30 días. Elige la prenda y la talla nueva.</p>' +
       '<form class="card" id="exform">' +
         '<label class="field">Prenda<select name="item">' + o.items.map(function (it) { return '<option value="' + it.id + '">' + it.name + " (talla " + it.size + ")</option>"; }).join("") + "</select></label>" +
         '<label class="field">Talla nueva<select name="to">' + SIZES.map(function (z) { return "<option>" + z + "</option>"; }).join("") + "</select></label>" +
@@ -250,7 +263,7 @@
   function viewNotes() {
     state.unread = 0;
     save();
-    return '<h1 class="h">Avisos</h1><p class="sub">Te contamos antes de que tengas que preguntar.</p><ul class="notes">' +
+    return banner("look5", "Sin que preguntes", "Avisos") + '<p class="sub">Te contamos antes de que tengas que preguntar.</p><ul class="notes">' +
       state.notes.map(function (n) {
         return '<li class="card note"><div class="row"><span class="chip ' + (n.ch === "WhatsApp" ? "wa" : "") + '">' + n.ch + '</span><span class="meta">' + n.time + "</span></div><p>" + n.text + "</p>" + (n.auto ? '<p class="auto">⚡ Automatización: ' + n.auto + "</p>" : "") + "</li>";
       }).join("") + "</ul>";
@@ -264,9 +277,9 @@
     { id: "c-inferno", name: "Conjunto Inferno", desc: "Buzo + jogger", color: "Negro y rojo", hex: "#b1121b", img: "img/inferno-s.webp", type: "conjunto", price: 320000, tags: ["color"], hot: 3 },
     { id: "c-rose", name: "Conjunto Rosé", desc: "Buzo + jogger", color: "Rosa", hex: "#c9909c", img: "img/rose-s.webp", type: "conjunto", price: 320000, tags: ["claro"], hot: 2 },
     { id: "c-cielo", name: "Conjunto Cielo", desc: "Buzo + jogger", color: "Azul claro", hex: "#aac4ee", img: "img/cielo-s.webp", type: "conjunto", price: 320000, tags: ["claro"], hot: 2 },
-    { id: "t-oversize", name: "Camiseta Oversize Med", desc: "100% algodón", color: "Negra", hex: "#1d1d1b", type: "camiseta", price: 99000, tags: ["neutro", "básico"], hot: 3 },
-    { id: "t-boxy", name: "Camiseta Boxy", desc: "100% algodón", color: "Blanca", hex: "#ffffff", type: "camiseta", price: 99000, tags: ["claro", "básico"], hot: 2 },
-    { id: "t-graphic", name: "Camiseta Graphic 0574", desc: "Estampado Medellín", color: "Morada", hex: "#a64dff", type: "camiseta", price: 99000, tags: ["color", "nuevo"], hot: 4 }
+    { id: "t-oversize", img: "logo.jpg", name: "Camiseta Oversize Med", desc: "100% algodón", color: "Negra", hex: "#1d1d1b", type: "camiseta", price: 99000, tags: ["neutro", "básico"], hot: 3 },
+    { id: "t-boxy", img: "logo.jpg", name: "Camiseta Boxy", desc: "100% algodón", color: "Blanca", hex: "#ffffff", type: "camiseta", price: 99000, tags: ["claro", "básico"], hot: 2 },
+    { id: "t-graphic", img: "logo.jpg", name: "Camiseta Graphic 0574", desc: "Estampado Medellín", color: "Morada", hex: "#a64dff", type: "camiseta", price: 99000, tags: ["color", "nuevo"], hot: 4 }
   ];
 
   /* Puntúa cada prenda con señales del cliente: lo que ya compró, su talla
@@ -408,7 +421,7 @@
     var msgs = chat();
     var last = msgs[msgs.length - 1];
     return '<div class="wa">' +
-      '<div class="wa-head"><span class="wa-av">LP</span><div><strong>La Percha Med</strong><span>' + (typing ? "escribiendo…" : "Asistente IA · responde al instante") + '</span></div></div>' +
+      '<div class="wa-head"><img class="wa-av" src="logo.jpg" alt="" width="36" height="36"><div><strong>La Percha Med</strong><span>' + (typing ? "escribiendo…" : "Asistente IA · responde al instante") + '</span></div></div>' +
       '<div class="wa-body" id="wabody">' + msgs.map(function (m) {
         return '<div class="wa-msg ' + m.from + '"><div class="wa-bub">' + m.html + '<span class="wa-t">' + m.t + (m.from === "me" ? " ✓✓" : "") + "</span></div></div>";
       }).join("") + (typing ? '<div class="wa-msg bot"><div class="wa-bub wa-typing"><i></i><i></i><i></i></div></div>' : "") + "</div>" +
