@@ -4,7 +4,7 @@
 (function () {
   "use strict";
 
-  var KEY = "lapercha.pedido.v2";
+  var KEY = "lapercha.pedido.v3";
 
   var STAGES = [
     { key: "confirmado", title: "Pedido confirmado", text: "Recibimos tu pago. Tu pedido entró a la fila de preparación." },
@@ -37,13 +37,13 @@
         courier: "Coordinadora · guía 7781 2290",
         address: "Cra. 43A #1-50, El Poblado, Medellín",
         items: [
-          { id: "a", name: "Hoodie oversize", size: "L", color: "Negro", price: 249900 },
-          { id: "b", name: "Camiseta boxy fit", size: "M", color: "Hueso", price: 129900 }
+          { id: "a", name: "Conjunto Medallo (buzo + jogger)", size: "L", color: "Negro", price: 320000 },
+          { id: "b", name: "Camiseta oversize Med", size: "M", color: "Hueso", price: 99000 }
         ]
       },
       notes: [
-        { ch: "WhatsApp", time: "9:15 a. m.", text: "Pedido LP-48213 confirmado. Llega jue 27 – vie 28 nov. Te avisamos en cada paso, no tienes que escribirnos." },
-        { ch: "Push", time: "11:02 a. m.", text: "Temporada alta: hoy preparamos 1.240 pedidos. Tu fecha ya tiene en cuenta ese volumen." }
+        { ch: "WhatsApp", auto: "Confirmación automática", time: "9:15 a. m.", text: "Pedido LP-48213 confirmado. Llega jue 27 – vie 28 nov. Te avisamos en cada paso, no tienes que escribirnos." },
+        { ch: "Push", auto: "Detector de pico", time: "11:02 a. m.", text: "Temporada alta: hoy preparamos 1.240 pedidos. Tu fecha ya tiene en cuenta ese volumen." }
       ]
     };
   }
@@ -69,8 +69,8 @@
     h = h % 12 || 12;
     return h + ":" + (m < 10 ? "0" : "") + m + " " + ap;
   }
-  function notify(ch, text) {
-    state.notes.unshift({ ch: ch, time: now(), text: text });
+  function notify(ch, text, auto) {
+    state.notes.unshift({ ch: ch, auto: auto || "", time: now(), text: text });
     state.unread += 1;
     toast(text);
   }
@@ -250,7 +250,7 @@
     save();
     return '<h1 class="h">Avisos</h1><p class="sub">Te contamos antes de que tengas que preguntar.</p><ul class="notes">' +
       state.notes.map(function (n) {
-        return '<li class="card note"><div class="row"><span class="chip ' + (n.ch === "WhatsApp" ? "wa" : "") + '">' + n.ch + '</span><span class="meta">' + n.time + "</span></div><p>" + n.text + "</p></li>";
+        return '<li class="card note"><div class="row"><span class="chip ' + (n.ch === "WhatsApp" ? "wa" : "") + '">' + n.ch + '</span><span class="meta">' + n.time + "</span></div><p>" + n.text + "</p>" + (n.auto ? '<p class="auto">⚡ Automatización: ' + n.auto + "</p>" : "") + "</li>";
       }).join("") + "</ul>";
   }
 
@@ -286,13 +286,13 @@
     if (state.stage >= 5) { toast("El pedido ya fue entregado. Usa Reiniciar para volver a empezar."); return; }
     state.stage += 1;
     var msgs = {
-      2: ["Push", "Tu pedido está empacado. Mira la foto real de tu paquete."],
-      3: ["WhatsApp", "Tu pedido salió con Coordinadora. Síguelo en vivo desde la app."],
-      4: ["WhatsApp", "Llega hoy entre " + state.order.slot + ". ¿No estarás? Reprograma con un toque."],
-      5: ["Push", "Entregado. ¿Cómo te quedó? Tu opinión de talla ayuda a otros."]
+      2: ["Push", "Tu pedido está empacado. Mira la foto real de tu paquete.", "Foto de empaque → cliente"],
+      3: ["WhatsApp", "Tu pedido salió con Coordinadora. Síguelo en vivo desde la app.", "Estado ERP → WhatsApp"],
+      4: ["WhatsApp", "Llega hoy entre " + state.order.slot + ". ¿No estarás? Reprograma con un toque.", "Aviso de última milla"],
+      5: ["Push", "Entregado. ¿Cómo te quedó? Tu opinión de talla ayuda a otros.", "Encuesta post-entrega"]
     };
     var m = msgs[state.stage];
-    if (m) notify(m[0], m[1]);
+    if (m) notify(m[0], m[1], m[2]);
     save(); render();
   }
 
@@ -301,7 +301,7 @@
     if (state.stage >= 5) { toast("El pedido ya se entregó a tiempo."); return; }
     state.late = true;
     state.coupon = "PERCHA15-" + state.order.id.slice(-4);
-    notify("WhatsApp", "Nos tardamos más de lo prometido. Tu nueva fecha es " + state.order.etaLate + " y ya tienes un cupón de 15%: " + state.coupon + ".");
+    notify("WhatsApp", "Nos tardamos más de lo prometido. Tu nueva fecha es " + state.order.etaLate + " y ya tienes un cupón de 15%: " + state.coupon + ".", "Promesa Percha (retraso → cupón)");
     save(); render();
   }
 
@@ -314,7 +314,7 @@
       code: "CMB-" + state.order.id.slice(-5) + "-" + it.id.toUpperCase(),
       item: it.name, from: it.size, to: f.to.value, how: how
     };
-    notify("WhatsApp", "Cambio aprobado: " + it.name + " a talla " + f.to.value + ". " + how.replace(/\.$/, "") + ".");
+    notify("WhatsApp", "Cambio aprobado: " + it.name + " a talla " + f.to.value + ". " + how.replace(/\.$/, "") + ".", "Cambio en 2 toques → logística inversa");
     save(); render();
   }
 
@@ -343,19 +343,19 @@
         var d = new Date(Date.now() + 25 * 60000);
         var h = d.getHours(), m = d.getMinutes();
         state.callback = (h % 12 || 12) + ":" + (m < 10 ? "0" : "") + m + (h >= 12 ? " p. m." : " a. m.");
-        notify("WhatsApp", "Reservaste tu turno. Te escribimos a las " + state.callback + " con tu pedido ya abierto.");
+        notify("WhatsApp", "Reservaste tu turno. Te escribimos a las " + state.callback + " con tu pedido ya abierto.", "Fila virtual → asignación de asesor");
         save(); render(); break;
       case "cancelcb":
         state.callback = null; save(); render(); toast("Turno cancelado. ¡Qué bueno que lo resolviste!"); break;
       case "reschedule":
         state.order.slot = "mañana, 8:00 – 12:00 m.";
-        notify("WhatsApp", "Listo, reprogramamos tu entrega para mañana entre 8:00 y 12:00 m.");
+        notify("WhatsApp", "Listo, reprogramamos tu entrega para mañana entre 8:00 y 12:00 m.", "Reprogramación con transportadora");
         save(); render(); break;
       case "address":
         var a = window.prompt("Nueva dirección de entrega", state.order.address);
         if (a && a.trim()) {
           state.order.address = a.trim();
-          notify("Push", "Dirección actualizada. Tu fecha de entrega no cambia.");
+          notify("Push", "Dirección actualizada. Tu fecha de entrega no cambia.", "Sincronización ERP");
           save(); render();
         }
         break;
@@ -374,7 +374,7 @@
     var prev = it.size;
     it.size = ev.target.value;
     state.editsLeft -= 1;
-    notify("Push", "Cambiamos tu " + it.name.toLowerCase() + " de talla " + prev + " a " + it.size + " antes de empacar. Sin costo y sin trámite de cambio.");
+    notify("Push", "Cambiamos tu " + it.name.toLowerCase() + " de talla " + prev + " a " + it.size + " antes de empacar. Sin costo y sin trámite de cambio.", "Ventana de edición → bodega");
     save(); render();
   });
 

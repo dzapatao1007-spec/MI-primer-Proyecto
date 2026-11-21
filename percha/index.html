@@ -68,6 +68,21 @@
     .weeks .card strong { font-family: var(--serif); font-size: 20px; }
     footer { padding: 40px 0 60px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
     .small { font-size: 14px; color: var(--muted); }
+    .shop { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
+    .prod { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+    .prod .img { aspect-ratio: 4/5; display: grid; place-items: center; font-family: var(--serif); font-weight: 800; letter-spacing: .08em; font-size: 13px; }
+    .prod .info { padding: 16px 18px 20px; }
+    .prod .info h3 { font-size: 18px; }
+    .prod .row { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 10px; }
+    .price { font-family: var(--serif); font-weight: 700; font-size: 20px; }
+    .prod .row .small { margin: 0; }
+    .flow { list-style: none; padding: 0; margin: 36px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .flow li { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 22px; }
+    .flow .trig { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 0; }
+    .flow h3 { font-size: 19px; margin-top: 8px; }
+    .flow .then { margin: 10px 0 0; color: var(--muted); font-size: 15px; }
+    .flow .tool { display: inline-block; margin-top: 12px; font-size: 12px; font-weight: 600; color: var(--accent); }
+    @media (max-width: 900px) { .shop, .flow { grid-template-columns: 1fr; } }
     @media (max-width: 900px) {
       .hero, .grid2 { grid-template-columns: 1fr; }
       .grid3, .weeks { grid-template-columns: 1fr; }
@@ -147,6 +162,38 @@
         <div class="card"><span class="tag">Transparencia</span><h3>Modo temporada alta</h3><p>Un aviso honesto: “hoy preparamos 1.240 pedidos”. Las fechas se ajustan solas a la carga real.</p></div>
         <div class="card"><span class="tag">Comunidad</span><h3>#MiPercha</h3><p>Al recibir, el cliente califica la talla y comparte su look a cambio de un 10%. Así la entrega también genera contenido para redes.</p></div>
       </div>
+    </section>
+
+    <section id="coleccion">
+      <p class="eyebrow">La colección</p>
+      <h2>Lo que el cliente está esperando.</h2>
+      <p class="lead" style="margin-top:18px">Conjuntos a $320.000 y camisetas a $99.000. Cada compra entra a la app Mi pedido desde el primer minuto.</p>
+      <div class="shop">
+        <article class="prod"><div class="img" style="background:#0a0a0a;color:#f2f2f0">LA PERCHA MED</div><div class="info"><h3>Conjunto Medallo</h3><p class="small" style="margin:6px 0 0">Buzo + jogger · Negro</p><div class="row"><span class="price">$320.000</span><span class="small">S · M · L · XL</span></div></div></article>
+        <article class="prod"><div class="img" style="background:#8a8a86;color:#0a0a0a">LA PERCHA MED</div><div class="info"><h3>Conjunto Poblado</h3><p class="small" style="margin:6px 0 0">Buzo + jogger · Gris jaspe</p><div class="row"><span class="price">$320.000</span><span class="small">S · M · L · XL</span></div></div></article>
+        <article class="prod"><div class="img" style="background:#ece7dc;color:#0a0a0a">LA PERCHA MED</div><div class="info"><h3>Conjunto Laureles</h3><p class="small" style="margin:6px 0 0">Buzo + jogger · Hueso</p><div class="row"><span class="price">$320.000</span><span class="small">S · M · L · XL</span></div></div></article>
+        <article class="prod"><div class="img" style="background:#1d1d1b;color:#e2400a">LA PERCHA MED</div><div class="info"><h3>Camiseta Oversize Med</h3><p class="small" style="margin:6px 0 0">100% algodón · Negra</p><div class="row"><span class="price">$99.000</span><span class="small">S · M · L · XL</span></div></div></article>
+        <article class="prod"><div class="img" style="background:#ffffff;color:#0a0a0a">LA PERCHA MED</div><div class="info"><h3>Camiseta Boxy</h3><p class="small" style="margin:6px 0 0">100% algodón · Blanca</p><div class="row"><span class="price">$99.000</span><span class="small">S · M · L · XL</span></div></div></article>
+        <article class="prod"><div class="img" style="background:#e2400a;color:#ffffff">LA PERCHA MED</div><div class="info"><h3>Camiseta Graphic 0574</h3><p class="small" style="margin:6px 0 0">Estampado Medellín · Naranja</p><div class="row"><span class="price">$99.000</span><span class="small">S · M · L · XL</span></div></div></article>
+      </div>
+    </section>
+
+    <section id="automatizaciones">
+      <p class="eyebrow">Automatizaciones</p>
+      <h2>El equipo no escala en diciembre. Las automatizaciones sí.</h2>
+      <p class="lead" style="margin-top:18px">Diez flujos que trabajan solos para que ningún cliente quede desatendido. En el prototipo, cada aviso muestra la automatización que lo disparó.</p>
+      <ol class="flow">
+        <li><p class="trig">Cuando: Cambia el estado en el ERP</p><h3>Aviso proactivo</h3><p class="then">WhatsApp o push al cliente en cada paso, con la fecha actualizada.</p><span class="tool">⚡ ERP → cola → WhatsApp Business API</span></li>
+        <li><p class="trig">Cuando: Llega un mensaje “¿dónde está mi pedido?”</p><h3>Respuesta automática con IA</h3><p class="then">Un clasificador detecta la intención y responde con los datos reales del pedido. Solo escala lo complejo.</p><span class="tool">⚡ IA + WhatsApp</span></li>
+        <li><p class="trig">Cuando: Pedidos del día superan el umbral</p><h3>Modo temporada alta</h3><p class="then">Recalcula las fechas de entrega según la carga de bodega y avisa a los clientes antes de que pregunten.</p><span class="tool">⚡ ERP + reglas de capacidad</span></li>
+        <li><p class="trig">Cuando: El pedido supera la fecha prometida</p><h3>Promesa Percha</h3><p class="then">Emite el cupón del 15%, envía la disculpa y la nueva fecha. Sin intervención humana.</p><span class="tool">⚡ Detector de retraso + cupones</span></li>
+        <li><p class="trig">Cuando: 2 horas antes de empacar</p><h3>Recordatorio de talla</h3><p class="then">Avisa que la ventana de edición está por cerrarse para evitar cambios después.</p><span class="tool">⚡ Programador de tareas</span></li>
+        <li><p class="trig">Cuando: Se empaca el pedido</p><h3>Foto de empaque</h3><p class="then">La foto del puesto de empaque se adjunta al pedido y se envía al cliente.</p><span class="tool">⚡ App de bodega → CDN</span></li>
+        <li><p class="trig">Cuando: El cliente pide hablar con alguien</p><h3>Fila virtual</h3><p class="then">Asigna un asesor, calcula la hora de contacto y le abre el pedido en pantalla.</p><span class="tool">⚡ Ruteo de turnos</span></li>
+        <li><p class="trig">Cuando: 48 h después de la entrega</p><h3>Encuesta + #MiPercha</h3><p class="then">Pide calificación y talla en un toque, e invita a compartir el look a cambio del 10%.</p><span class="tool">⚡ Encuestas + redes</span></li>
+        <li><p class="trig">Cuando: Calificación baja (≤ 3)</p><h3>Rescate del cliente</h3><p class="then">Crea un caso prioritario y alerta al equipo para llamarlo el mismo día.</p><span class="tool">⚡ CSAT → alerta al equipo</span></li>
+        <li><p class="trig">Cuando: 30 días después de la compra</p><h3>Recompra inteligente</h3><p class="then">Recomienda prendas en su talla confirmada, con envío prioritario.</p><span class="tool">⚡ Segmentación por talla</span></li>
+      </ol>
     </section>
 
     <section id="escala">
