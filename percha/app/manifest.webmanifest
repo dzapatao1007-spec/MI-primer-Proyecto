@@ -4,10 +4,10 @@
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f6f2ea",
-  "theme_color": "#1c1917",
+  "background_color": "#060509",
+  "theme_color": "#060509",
   "lang": "es",
   "icons": [
-    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+    { "src": "logo.jpg", "sizes": "976x1088", "type": "image/jpeg", "purpose": "any" }
   ]
 }

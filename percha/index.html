@@ -6,20 +6,20 @@
   <title>La Percha Med · Mi pedido</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
   <meta name="description" content="Propuesta para el reto ESIC: una app post-compra que avisa antes de que el cliente pregunte, pensada para el pico de fin de año de La Percha.">
-  <meta name="theme-color" content="#1c1917">
-  <link rel="icon" href="app/icon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#060509">
+  <link rel="icon" href="app/logo.jpg">
   <style>
     :root {
-      --bg: #f2f2f0; --surface: #ffffff; --ink: #0a0a0a; --muted: #5f5f5b; --line: #e0e0dc;
-      --accent: #e2400a; --accent-soft: #fde6dc; --ok: #2f6b4f;
-      --serif: "Syne", "Space Grotesk", system-ui, sans-serif;
+  --bg: #060509; --surface: #0f0c16; --ink: #f2f1f5; --muted: #a9a5b8; --line: #2a2138;
+  --accent: #a64dff; --accent-soft: #231238; --ok: #7cc6a0; --ok-soft: #14261d; --wa: #6fd3a0;
+  --silver: linear-gradient(135deg,#f4f4f6 0%,#9d9aa8 45%,#e9e8ee 100%);
+  color-scheme: dark;
+  --serif: "Syne", "Space Grotesk", system-ui, sans-serif;
       --sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       color-scheme: light;
     }
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) { --bg: #151311; --surface: #1f1c19; --ink: #f3eee6; --muted: #a79e93; --line: #34302b; --accent: #e07a50; --accent-soft: #3a261d; --ok: #7cc6a0; color-scheme: dark; }
-    }
-    :root[data-theme="dark"] { --bg: #151311; --surface: #1f1c19; --ink: #f3eee6; --muted: #a79e93; --line: #34302b; --accent: #e07a50; --accent-soft: #3a261d; --ok: #7cc6a0; color-scheme: dark; }
+    
+    
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.55; font-size: 17px; -webkit-font-smoothing: antialiased; }
     a { color: inherit; }
@@ -28,18 +28,19 @@
     .logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 20px; font-weight: 800; letter-spacing: .02em; text-decoration: none; }
     .pill { font-size: 13px; border: 1px solid var(--line); border-radius: 99px; padding: 6px 12px; color: var(--muted); }
     h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: -0.02em; line-height: 1.08; margin: 0; }
-    h1 { font-size: clamp(40px, 6vw, 68px); }
+    h1 { background: linear-gradient(135deg,#fff,#a9a5b8 60%,#e9e8ee); -webkit-background-clip: text; background-clip: text; color: transparent; font-size: clamp(40px, 6vw, 68px); }
     h2 { font-size: clamp(30px, 4vw, 44px); }
     h3 { font-size: 22px; }
     .eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 0 0 14px; }
     .lead { font-size: 20px; color: var(--muted); max-width: 34em; }
     section { padding: 72px 0; border-top: 1px solid var(--line); }
+    .logo-img { border-radius: 8px; object-fit: cover; box-shadow: 0 0 18px #a64dff66; }
     .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; padding: 36px 0 72px; border: 0; }
     .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
     .btn { display: inline-block; padding: 14px 20px; border-radius: 14px; font-weight: 600; text-decoration: none; }
-    .btn.primary { background: var(--accent); color: #fff; }
+    .btn.primary { background: linear-gradient(135deg,#8a2be2,#b44cff); color: #fff; box-shadow: 0 0 28px -6px #a64dffaa; }
     .btn.ghost { border: 1px solid var(--line); background: var(--surface); }
-    .phone { justify-self: center; width: 390px; max-width: 100%; height: 780px; border-radius: 48px; background: #0d0c0b; padding: 12px; box-shadow: 0 40px 80px -40px rgba(28,25,23,.55); }
+    .phone { box-shadow: 0 0 80px -20px #a64dff99; justify-self: center; width: 390px; max-width: 100%; height: 780px; border-radius: 48px; background: #0d0c0b; padding: 12px; box-shadow: 0 40px 80px -40px rgba(28,25,23,.55); }
     .phone iframe { width: 100%; height: 100%; border: 0; border-radius: 38px; background: var(--bg); display: block; }
     .phone-note { text-align: center; font-size: 14px; color: var(--muted); margin-top: 14px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
@@ -126,7 +127,7 @@
 <body>
   <div class="wrap">
     <nav class="top">
-      <a class="logo" href="./"><svg viewBox="0 0 48 32" width="34" height="22" aria-hidden="true"><path d="M24 4a4 4 0 1 1 4 4c-2 0-4 1.6-4 4v1L4 26h40L24 13" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>LA PERCHA MED</a>
+      <a class="logo" href="./"><img src="app/logo.jpg" alt="" width="40" height="40" class="logo-img">LA PERCHA MED</a>
       <span class="pill">Reto ESIC · Operaciones</span>
     </nav>
 
@@ -255,7 +256,7 @@
             <p class="small" style="font-size:15px;margin-top:8px">Hace un mes llegó tu Conjunto Medallo. Estas prendas lo completan:</p>
             <div class="mp">
               <div><i style="background:#1d1d1b"></i><b>Oversize Med</b><small>$99.000</small></div>
-              <div><i style="background:#e2400a"></i><b>Graphic 0574</b><small>$99.000</small></div>
+              <div><i style="background:#a64dff"></i><b>Graphic 0574</b><small>$99.000</small></div>
               <div><i style="background:#8a8a86"></i><b>Conj. Poblado</b><small>$320.000</small></div>
             </div>
             <a class="btn primary" href="app/#/whatsapp" style="display:block;text-align:center">Comprar con 10% · VUELVE10</a>
@@ -273,9 +274,9 @@
         <article class="prod"><div class="img" style="background:#0a0a0a;color:#f2f2f0">LA PERCHA MED</div><div class="info"><h3>Conjunto Medallo</h3><p class="small" style="margin:6px 0 0">Buzo + jogger · Negro</p><div class="row"><span class="price">$320.000</span><span class="small">S · M · L · XL</span></div></div></article>
         <article class="prod"><div class="img" style="background:#8a8a86;color:#0a0a0a">LA PERCHA MED</div><div class="info"><h3>Conjunto Poblado</h3><p class="small" style="margin:6px 0 0">Buzo + jogger · Gris jaspe</p><div class="row"><span class="price">$320.000</span><span class="small">S · M · L · XL</span></div></div></article>
         <article class="prod"><div class="img" style="background:#ece7dc;color:#0a0a0a">LA PERCHA MED</div><div class="info"><h3>Conjunto Laureles</h3><p class="small" style="margin:6px 0 0">Buzo + jogger · Hueso</p><div class="row"><span class="price">$320.000</span><span class="small">S · M · L · XL</span></div></div></article>
-        <article class="prod"><div class="img" style="background:#1d1d1b;color:#e2400a">LA PERCHA MED</div><div class="info"><h3>Camiseta Oversize Med</h3><p class="small" style="margin:6px 0 0">100% algodón · Negra</p><div class="row"><span class="price">$99.000</span><span class="small">S · M · L · XL</span></div></div></article>
+        <article class="prod"><div class="img" style="background:#1d1d1b;color:#a64dff">LA PERCHA MED</div><div class="info"><h3>Camiseta Oversize Med</h3><p class="small" style="margin:6px 0 0">100% algodón · Negra</p><div class="row"><span class="price">$99.000</span><span class="small">S · M · L · XL</span></div></div></article>
         <article class="prod"><div class="img" style="background:#ffffff;color:#0a0a0a">LA PERCHA MED</div><div class="info"><h3>Camiseta Boxy</h3><p class="small" style="margin:6px 0 0">100% algodón · Blanca</p><div class="row"><span class="price">$99.000</span><span class="small">S · M · L · XL</span></div></div></article>
-        <article class="prod"><div class="img" style="background:#e2400a;color:#ffffff">LA PERCHA MED</div><div class="info"><h3>Camiseta Graphic 0574</h3><p class="small" style="margin:6px 0 0">Estampado Medellín · Naranja</p><div class="row"><span class="price">$99.000</span><span class="small">S · M · L · XL</span></div></div></article>
+        <article class="prod"><div class="img" style="background:#a64dff;color:#ffffff">LA PERCHA MED</div><div class="info"><h3>Camiseta Graphic 0574</h3><p class="small" style="margin:6px 0 0">Estampado Medellín · Naranja</p><div class="row"><span class="price">$99.000</span><span class="small">S · M · L · XL</span></div></div></article>
       </div>
     </section>
 

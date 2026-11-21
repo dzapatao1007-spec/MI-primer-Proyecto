@@ -4,7 +4,7 @@
 (function () {
   "use strict";
 
-  var KEY = "lapercha.pedido.v4";
+  var KEY = "lapercha.pedido.v5";
 
   var STAGES = [
     { key: "confirmado", title: "Pedido confirmado", text: "Recibimos tu pago. Tu pedido entró a la fila de preparación." },
